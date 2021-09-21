@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: elastic-search
+  namespace: {{ .Values.label }}
+spec:
+  selector:
+    matchLabels:
+      app: elastic-search
+  serviceName: elastic-search
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: elastic-search
+    spec:
+      containers:
+        - name: elastic-search
+          image: docker.elastic.co/elasticsearch/elasticsearch:7.9.2
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9200
+              name: elastic-search
+          env:
+            - name: discovery.type
+              value: single-node

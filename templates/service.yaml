@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.label }}
+  namespace: {{ .Values.label }}
+spec:
+  ports:
+    - port: 80
+      name: {{ .Values.label }}
+  selector:
+    app: {{ .Values.label }}

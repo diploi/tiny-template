@@ -1,0 +1,90 @@
+diploiTemplateVersion: V1.0
+name: diploi-nextjs-template
+description: NextJS template for Diploi
+
+stages:
+  - name: Production
+    label: production
+  - name: Staging
+    label: staging
+  - name: Development
+    label: development
+
+parameterGroups:
+  - name: MySQL Database
+    label: DB
+    toggleable: true
+    parameters:
+      - name: Host
+        label: DB_HOST
+        value: mysql.example.com
+        type: string
+      - name: Password
+        label: DB_PASSWORD
+        value: ''
+        type: secret
+  - name: Servers
+    label: SERVER
+    parameters:
+      - name: Server count
+        label: SERVER_REPLICAS
+        value: 2
+        type: integer
+        stages:
+          - production
+
+environment:
+  - name: MYSETTING
+    value: asdasd
+    type: string
+    selector: label=web
+
+repositories:
+  - name: web
+    label: web
+    url: https://github.com/NemesysLtd/diploi-node-sample #optional
+
+hosts:
+  - name: Web
+    label: web
+    url: 'www-[project-name]-[deployment-name].[default-domain]'
+
+ssh:
+  - username: '[project]-[deployment]'
+    selector: label=web
+    stages:
+      - development
+  - username: '[project]-[deployment]-[index]'
+    selector: label=web
+    stages:
+      - production
+  - username: '[project]-[deployment]-varnish'
+    selector: label=varnish
+
+logs:
+  - name: Pod Log
+    selector: label=web
+  - name: API Log
+    selector: label=web
+    command: tail --lines 2000 -f /var/log/api.log
+  - name: API Error Log
+    selector: label=web
+    command: tail --lines 2000 -f /var/log/api.log | grep Fatal
+
+actions:
+  - name: Restart servers
+    selector: label=web
+    command: npm run restart
+  - name: Reinstall packages
+    selector: label=web
+    command: npm run clean
+#images:
+#  - identifier: web
+#    builds:
+#      - dockerfile: DockerfileProd
+#        stages:
+#          - production
+#      - dockerfile: DockerfileDev
+#        stages:
+#          - development
+#          - staging

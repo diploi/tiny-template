@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.label }}
+  namespace: {{ .Values.label }}
+  labels:
+    app: {{ .Values.label }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.label }}
+  serviceName: {{ .Values.label }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.label }}
+    spec:
+      terminationGracePeriodSeconds: 10
+      imagePullSecrets:
+        - name: registry-credentials
+      containers:
+        - name: {{ .Values.label }}
+          image: nemesys/framework2020
+          ports:
+            - containerPort: 80
+          env:
+            - name: SSH_AUTHORIZED_HOSTS
+              value: sshKeys['internal_ssh_host_rsa.pub']
+          volumeMounts:
+            - mountPath: /app
+              name: storage-mount
+              subPath: project
+            - mountPath: /root-persist
+              name: storage-mount
+              subPath: root
+      volumes:
+        - name: storage-mount
+          hostPath:
+            path: /storage/projects/{{ .Values.label }}

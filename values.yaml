@@ -1,0 +1,9 @@
+label: test-constle
+hostname: constle.johannes.diploi.nemesys.fi
+apiHostname: api-constle.johannes.diploi.nemesys.fi
+
+dockerRegistry:
+  hostname: 'https://index.docker.io/v1/'
+  username: 'nemesys'
+  password: ''
+  email: ''
