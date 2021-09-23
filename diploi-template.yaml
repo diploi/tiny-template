@@ -78,13 +78,14 @@ actions:
   - name: Reinstall packages
     selector: label=web
     command: npm run clean
-#images:
-#  - identifier: web
-#    builds:
-#      - dockerfile: DockerfileProd
-#        stages:
-#          - production
-#      - dockerfile: DockerfileDev
-#        stages:
-#          - development
-#          - staging
+
+images: 
+  - label: 'app',
+    builds: 
+      - dockerfile: AppProduction.Dockerfile
+        stages: 
+          - production
+          - staging
+      - dockerfile: AppDevelopment.Dockerfile
+        stages:
+          - development

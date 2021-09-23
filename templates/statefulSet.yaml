@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: {{ .Values.label }}
-  namespace: {{ .Values.label }}
   labels:
     app: {{ .Values.label }}
 spec:
@@ -20,7 +19,7 @@ spec:
         - name: registry-credentials
       containers:
         - name: {{ .Values.label }}
-          image: nemesys/framework2020
+          image: registry-docker-registry.registry/namespace/imagename:tag
           ports:
             - containerPort: 80
           env:
@@ -28,12 +27,12 @@ spec:
               value: sshKeys['internal_ssh_host_rsa.pub']
           volumeMounts:
             - mountPath: /app
-              name: storage-mount
+              name: app-mount
               subPath: project
             - mountPath: /root-persist
-              name: storage-mount
+              name: app-mount
               subPath: root
       volumes:
-        - name: storage-mount
-          hostPath:
-            path: /storage/projects/{{ .Values.label }}
+        - name: app-mount
+          persistentVolumeClaim:
+            claimName: {{ .Values.appMount }}

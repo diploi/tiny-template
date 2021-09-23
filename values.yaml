@@ -1,6 +1,7 @@
-label: test-constle
-hostname: constle.johannes.diploi.nemesys.fi
-apiHostname: api-constle.johannes.diploi.nemesys.fi
+label: app
+hostname: diploi.test.nemesys.fi
+apiHostname: diploi.test.nemesys.fi
+appMount: pvc-mydiploiproject-myfirstdeploiment-app-code
 
 dockerRegistry:
   hostname: 'https://index.docker.io/v1/'
