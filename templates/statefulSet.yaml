@@ -16,7 +16,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 10
       imagePullSecrets:
-        - name: registry-credentials
+        - name: docker-pull-secret
       containers:
         - name: {{ .Values.label }}
           image: registry-docker-registry.registry/namespace/imagename:tag

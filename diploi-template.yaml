@@ -82,11 +82,11 @@ actions:
 images:
   - label: app
     builds:
-      - dockerfile: AppProduction.Dockerfile
+      - dockerfile: Dockerfile
         stages:
           - production
           - staging
-      - dockerfile: AppDevelopment.Dockerfile
+      - dockerfile: Dockerfile
         stages:
           - development
 
