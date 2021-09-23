@@ -20,6 +20,7 @@ spec:
       containers:
         - name: {{ .Values.label }}
           image: registry-docker-registry.registry/namespace/imagename:tag
+          command: ['sh', '-c', 'echo The app is running! && sleep 10000']
           ports:
             - containerPort: 80
           env:
