@@ -12,7 +12,7 @@ stages:
 
 parameterGroups:
   - name: MySQL Database
-    label: DB
+    label: mysql
     toggleable: true
     parameters:
       - name: Host
@@ -45,8 +45,8 @@ repositories:
     url: https://github.com/NemesysLtd/diploi-node-sample #optional
 
 hosts:
-  - name: Web
-    label: web
+  - name: App
+    label: app
     url: 'www-[project-name]-[deployment-name].[default-domain]'
 
 ssh:

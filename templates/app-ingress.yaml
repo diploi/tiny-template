@@ -8,17 +8,17 @@ metadata:
 spec:
   tls:
     - hosts:
-        - {{ .Values.hostname }}
+        - {{ .Values.hosts.app }}
       secretName: tls-secret
   rules:
-    - host: {{ .Values.hostname }}
+    - host: {{ .Values.hosts.app }}
       http:
         paths:
           - path: '/'
             pathType: Prefix
             backend:
-              serviceName: {{ .Values.label }}
-              servicePort: 5000
+              serviceName: app
+              servicePort: 80
               #service: (This is for newer kubernetes?)
               #  name: {{ .Values.label }}
               #  port:

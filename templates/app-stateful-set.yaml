@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: app
+  labels:
+    app: app
+spec:
+  selector:
+    matchLabels:
+      app: app
+  serviceName: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      terminationGracePeriodSeconds: 10
+      imagePullSecrets:
+        - name: docker-pull-secret
+      containers:
+        - name: app
+          image: {{ .Values.images.app }}
+          #command: ['sh', '-c', 'echo The app is running! && sleep 10000']
+          ports:
+            - containerPort: 80
+          env:
+            - name: SSH_AUTHORIZED_HOSTS
+              value: sshKeys['internal_ssh_host_rsa.pub']
+          volumeMounts:
+            #- mountPath: /app
+            #  name: app-mount
+            #  subPath: project
+            #- mountPath: /root-persist
+            #  name: app-mount
+            #  subPath: root
+      #volumes:
+      #  - name: app-mount
+      #    persistentVolumeClaim:
+      #      claimName: {{ .Values.appMount }}

@@ -1,10 +1,24 @@
-label: app
-hostname: diploi.test.nemesys.fi
-apiHostname: diploi.test.nemesys.fi
-appMount: pvc-app-code
 
-dockerRegistry:
-  hostname: 'https://index.docker.io/v1/'
-  username: 'nemesys'
-  password: ''
-  email: ''
+#
+# Example: 
+# These will be filled in automatically by core (based on diploi-template.yaml)
+#
+
+images:
+  app: registry-docker-registry.registry/myfirstdeploiment/app:latest
+
+hosts:
+  app: xxx.diploinetes.nemesys.fi
+
+storage:
+  code: pvc-app-code
+
+parameterGroups:
+  mysql:
+    enabled: false,
+    parameters:
+      DB_HOST: mysql,
+      DB_DB_PASSWORD: pw
+
+env: 
+  example: value
