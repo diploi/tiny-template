@@ -1,7 +1,7 @@
 label: app
 hostname: diploi.test.nemesys.fi
 apiHostname: diploi.test.nemesys.fi
-appMount: pvc-mydiploiproject-myfirstdeploiment-app-code
+appMount: pvc-app-code
 
 dockerRegistry:
   hostname: 'https://index.docker.io/v1/'
