@@ -89,3 +89,9 @@ images:
       - dockerfile: AppDevelopment.Dockerfile
         stages:
           - development
+
+storage:
+  - label: code
+    stages: 
+      - development
+    sizeMb: 8000 
