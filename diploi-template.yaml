@@ -79,11 +79,11 @@ actions:
     selector: label=web
     command: npm run clean
 
-images: 
-  - label: 'app',
-    builds: 
+images:
+  - label: app
+    builds:
       - dockerfile: AppProduction.Dockerfile
-        stages: 
+        stages:
           - production
           - staging
       - dockerfile: AppDevelopment.Dockerfile
