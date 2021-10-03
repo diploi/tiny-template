@@ -33,8 +33,12 @@ parameterGroups:
         stages:
           - production
 
-environment:
-  - name: MYSETTING
+environmentVariables:
+  - name: PROJECT_TITLE
+    value: ProjectTitleDefaultFromTemplate
+    type: string
+    selector: label=web
+  - name: SOME_OTHER_SETTING
     value: asdasd
     type: string
     selector: label=web
@@ -81,14 +85,11 @@ actions:
 
 images:
   - label: app
-    builds:
-      - dockerfile: Dockerfile
-        stages:
-          - production
-          - staging
-      - dockerfile: Dockerfile
-        stages:
-          - development
+    dockerfile: Dockerfile
+    stages:
+      - production
+      - staging
+      - development      
 
 storage:
   - label: code
