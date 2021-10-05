@@ -21,4 +21,9 @@ parameterGroups:
       DB_DB_PASSWORD: pw
 
 env: 
-  example: value
+  - name: SMTP_HOST
+    value: somehost.someplace.net
+    selector: label=app
+  - name: SMTP_PASSWORD
+    value: xyz
+    selector: label=app

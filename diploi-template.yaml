@@ -10,6 +10,12 @@ stages:
   - name: Development
     label: development
 
+contexts:
+  - name: app
+    label: app
+  - name: redis
+    label: redis
+
 parameterGroups:
   - name: MySQL Database
     label: mysql
@@ -37,11 +43,11 @@ environmentVariables:
   - name: PROJECT_TITLE
     value: ProjectTitleDefaultFromTemplate
     type: string
-    selector: label=web
+    selector: label=app
   - name: SOME_OTHER_SETTING
     value: asdasd
     type: string
-    selector: label=web
+    selector: label=app
 
 repositories:
   - name: web
@@ -55,11 +61,11 @@ hosts:
 
 ssh:
   - username: '[project]-[deployment]'
-    selector: label=web
+    selector: label=app
     stages:
       - development
   - username: '[project]-[deployment]-[index]'
-    selector: label=web
+    selector: label=app
     stages:
       - production
   - username: '[project]-[deployment]-varnish'
@@ -67,20 +73,20 @@ ssh:
 
 logs:
   - name: Pod Log
-    selector: label=web
+    selector: label=app
   - name: API Log
-    selector: label=web
+    selector: label=app
     command: tail --lines 2000 -f /var/log/api.log
   - name: API Error Log
-    selector: label=web
+    selector: label=app
     command: tail --lines 2000 -f /var/log/api.log | grep Fatal
 
 actions:
   - name: Restart servers
-    selector: label=web
+    selector: label=app
     command: npm run restart
   - name: Reinstall packages
-    selector: label=web
+    selector: label=app
     command: npm run clean
 
 images:
