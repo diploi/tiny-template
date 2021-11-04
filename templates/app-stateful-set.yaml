@@ -24,8 +24,14 @@ spec:
           ports:
             - containerPort: 80
           env:
-            - name: SSH_AUTHORIZED_HOSTS
-              value: sshKeys['internal_ssh_host_rsa.pub']
+          {{- range .Values.env }}
+            {{- if contains "app" .selector }}
+            - name: {{ .name }}
+              value: {{ .value | quote }}
+            {{- end }}
+          {{- end }}
+          #- name: SSH_AUTHORIZED_HOSTS
+          #  value: sshKeys['internal_ssh_host_rsa.pub']
           volumeMounts:
             #- mountPath: /app
             #  name: app-mount

@@ -26,3 +26,9 @@ spec:
           env:
             - name: REDIS_PASS
               value: xxxyyy
+            {{- range .Values.env }}
+            {{- if contains "redis" .selector }}
+            - name: {{ .name }}
+              value: {{ .value | quote }}
+            {{- end }}
+            {{- end }}
