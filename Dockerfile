@@ -6,7 +6,8 @@ COPY repository/package*.json ./
 RUN npm install
 
 COPY repository/index.js ./
+COPY repository/index2.js ./
 
 EXPOSE 8080
 
-CMD [ "node", "index.js" ]
+CMD [ "node", "index2.js" ]
