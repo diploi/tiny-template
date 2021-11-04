@@ -92,6 +92,7 @@ actions:
 images:
   - label: app
     dockerfile: Dockerfile
+    repository: web
     stages:
       - production
       - staging
