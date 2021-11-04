@@ -7,6 +7,7 @@ RUN npm install
 
 COPY repository/index.js ./
 COPY repository/index2.js ./
+COPY repository/index2.js ./
 
 EXPOSE 8080
 
