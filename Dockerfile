@@ -10,4 +10,4 @@ COPY repository/index2.js ./
 
 EXPOSE 8080
 
-CMD [ "node", "index2.js" ]
+CMD [ "node", "index.js" ]
