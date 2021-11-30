@@ -60,16 +60,16 @@ hosts:
     url: 'www-[project-name]-[deployment-name].[default-domain]'
 
 ssh:
-  - username: '[project]-[deployment]'
+  - username: '[deploymentid]'
     selector: label=app
     stages:
       - development
-  - username: '[project]-[deployment]-[index]'
+  - username: '[deploymentid]-[index]'
     selector: label=app
     stages:
       - production
-  - username: '[project]-[deployment]-varnish'
-    selector: label=varnish
+  - username: '[deploymentid]-redis'
+    selector: label=redis
 
 logs:
   - name: Pod Log
