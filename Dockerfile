@@ -38,14 +38,3 @@ RUN npm install
 COPY runonce.sh /root/runonce.sh
 COPY supervisord.conf /etc/supervisord.conf
 CMD /usr/bin/supervisord -c /etc/supervisord.conf
-
-
-# Install application
-WORKDIR /app
-COPY . .
-RUN npm install
-
-# Init and run supervisor
-ADD saas-dev/runonce.sh /root/runonce.sh
-ADD saas-dev/supervisord.conf /etc/supervisord.conf
-CMD /usr/bin/supervisord -c /etc/supervisord.conf
