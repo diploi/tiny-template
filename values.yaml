@@ -4,6 +4,8 @@
 # These will be filled in automatically by core (based on diploi-template.yaml)
 #
 
+stage: development
+
 images:
   app: registry-docker-registry.registry/myfirstdeploiment/app:latest
 
@@ -11,7 +13,12 @@ hosts:
   app: xxx.diploinetes.nemesys.fi
 
 storage:
-  code: pvc-app-code
+  - label: app
+    hostPath: /storage/d11111/volume-app
+    sizeMB: 8000
+  - label: root-persist
+    hostPath: /storage/d11111/volume-root-persist
+    sizeMB: 1000
 
 parameterGroups:
   mysql:
@@ -27,3 +34,5 @@ env:
   - name: SMTP_PASSWORD
     value: xyz
     selector: label=app
+
+sshInternalProxyPublicKey: xxxx

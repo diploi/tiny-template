@@ -24,22 +24,37 @@ spec:
           ports:
             - containerPort: 80
           env:
-          {{- range .Values.env }}
+            {{- range .Values.env }}
             {{- if contains "app" .selector }}
             - name: {{ .name }}
               value: {{ .value | quote }}
             {{- end }}
-          {{- end }}
-          #- name: SSH_AUTHORIZED_HOSTS
-          #  value: sshKeys['internal_ssh_host_rsa.pub']
+            {{- end }}
           volumeMounts:
-            #- mountPath: /app
-            #  name: app-mount
-            #  subPath: project
-            #- mountPath: /root-persist
-            #  name: app-mount
-            #  subPath: root
-      #volumes:
-      #  - name: app-mount
-      #    persistentVolumeClaim:
-      #      claimName: {{ .Values.appMount }}
+            {{- if hasKey .Values.storage "app" }}
+            - mountPath: /app
+              name: app-mount
+            {{- end }}
+            {{- if hasKey .Values.storage "root-persist" }}
+            - mountPath: /root-persist
+              name: root-mount
+            {{- end }}
+            - name: ssh-keys
+              mountPath: /etc/ssh/
+              subPath: internal_ssh_host_rsa.pub
+      volumes:
+        {{- if hasKey .Values.storage "app" }}
+        - name: app-mount
+          hostPath:
+            path: {{ .Values.storage.code.hostPath }}
+        {{- end }}
+        {{- if hasKey .Values.storage "root-persist" }}
+        - name: root-mount
+          hostPath:
+            path: {{ .Values.storage.root-persist.hostPath }}
+        {{- end }}
+        - name: ssh-keys
+          secret:
+            secretName: ssh-keys
+
+        

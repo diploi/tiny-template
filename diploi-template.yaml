@@ -57,7 +57,7 @@ repositories:
 hosts:
   - name: App
     label: app
-    url: 'www-[project-name]-[deployment-name].[default-domain]'
+    url: 'www-[label].[default-domain]'
 
 ssh:
   - username: '[deploymentid]'
@@ -99,7 +99,11 @@ images:
       - development      
 
 storage:
-  - label: code
+  - label: app
     stages: 
       - development
     sizeMb: 8000 
+  - label: root-persist
+    stages: 
+      - development
+    sizeMb: 1000 
