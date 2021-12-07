@@ -17,7 +17,7 @@ RUN mkdir /run/sshd /root/.ssh \
   # Go to app folder by default
   && echo "cd /app;" >> /root/.bashrc
 
-# Fix  LC_ALL: cannot change locale (en_US.UTF-8) error
+# Fix LC_ALL: cannot change locale (en_US.UTF-8) error
 RUN echo "LC_ALL=en_US.UTF-8" >> /etc/environment && \
   echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && \
   echo "LANG=en_US.UTF-8" > /etc/locale.conf && \
