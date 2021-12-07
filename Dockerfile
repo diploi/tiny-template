@@ -2,7 +2,7 @@ FROM node:16.13
 
 # This dockerfile is run by diploi image builder, it will have 
 # this template repository as itse base and the actual project 
-# repository will be mounted in the repository folder
+# repository will be mounted in the repository folder.
 
 # Update packages
 RUN apt-get update && apt-get install -y nano supervisor openssh-server git bash wget curl locales
