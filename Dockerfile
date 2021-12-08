@@ -29,12 +29,12 @@ RUN mkdir -p /root-persist \
   && ln -s /root-persist/.gitconfig /root/.gitconfig \
   && ln -s /root-persist/.vscode-server/ /root/.vscode-server
 
-# Install application
+# Install application code
 WORKDIR /app
-COPY repository/. ./
+COPY project/. ./
 RUN npm install
 
 # Init and run supervisor
-COPY runonce.sh /root/runonce.sh
-COPY supervisord.conf /etc/supervisord.conf
+COPY template/runonce.sh /root/runonce.sh
+COPY template/supervisord.conf /etc/supervisord.conf
 CMD /usr/bin/supervisord -c /etc/supervisord.conf
