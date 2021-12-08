@@ -53,7 +53,7 @@ spec:
           hostPath:
             path: {{ .Values.storage.rootpersist.hostPath }}
         {{- end }}
-        #- name: ssh-keys
+        ##- name: ssh-keys
         #  secret:
         #    secretName: ssh-keys
 
