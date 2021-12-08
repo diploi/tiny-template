@@ -32,12 +32,12 @@ spec:
             {{- end }}
           volumeMounts:
             {{- if hasKey .Values.storage "app" }}
-            - mountPath: /app
-              name: app-mount
+            - name: app-mount
+              mountPath: /app
             {{- end }}
             {{- if hasKey .Values.storage "rootpersist" }}
-            - mountPath: /root-persist
-              name: root-mount
+            - name: root-mount
+              mountPath: /root-persist
             {{- end }}
             - name: ssh-keys
               mountPath: /etc/ssh/
