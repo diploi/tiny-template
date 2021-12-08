@@ -60,15 +60,15 @@ hosts:
     url: 'www-[label].[default-domain]'
 
 ssh:
-  - username: '[deploymentid]'
+  - username: '[label]'
     selector: label=app
     stages:
       - development
-  - username: '[deploymentid]-[index]'
+  - username: '[label]-[index]'
     selector: label=app
     stages:
       - production
-  - username: '[deploymentid]-redis'
+  - username: '[label]-redis'
     selector: label=redis
 
 logs:
