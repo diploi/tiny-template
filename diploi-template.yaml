@@ -103,7 +103,7 @@ storage:
     stages: 
       - development
     sizeMb: 8000 
-  - label: root-persist
+  - label: rootpersist
     stages: 
       - development
     sizeMb: 1000 
