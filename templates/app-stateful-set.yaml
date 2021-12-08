@@ -35,7 +35,7 @@ spec:
             - mountPath: /app
               name: app-mount
             {{- end }}
-            {{- if hasKey .Values.storage "root-persist" }}
+            {{- if hasKey .Values.storage "rootpersist" }}
             - mountPath: /root-persist
               name: root-mount
             {{- end }}
@@ -48,10 +48,10 @@ spec:
           hostPath:
             path: {{ .Values.storage.code.hostPath }}
         {{- end }}
-        {{- if hasKey .Values.storage "root-persist" }}
+        {{- if hasKey .Values.storage "rootpersist" }}
         - name: root-mount
           hostPath:
-            path: {{ .Values.storage.root-persist.hostPath }}
+            path: {{ .Values.storage.rootpersist.hostPath }}
         {{- end }}
         - name: ssh-keys
           secret:
