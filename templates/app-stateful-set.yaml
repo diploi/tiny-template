@@ -39,9 +39,9 @@ spec:
             - name: root-mount
               mountPath: /root-persist
             {{- end }}
-            - name: ssh-keys
-              mountPath: /etc/ssh/
-              subPath: internal_ssh_host_rsa.pub
+            #- name: ssh-keys
+            #  mountPath: /etc/ssh/
+            #  subPath: internal_ssh_host_rsa.pub
       volumes:
         {{- if hasKey .Values.storage "app" }}
         - name: app-mount
@@ -53,8 +53,8 @@ spec:
           hostPath:
             path: {{ .Values.storage.rootpersist.hostPath }}
         {{- end }}
-        - name: ssh-keys
-          secret:
-            secretName: ssh-keys
+        #- name: ssh-keys
+        #  secret:
+        #    secretName: ssh-keys
 
         
