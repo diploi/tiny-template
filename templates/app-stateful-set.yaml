@@ -46,7 +46,7 @@ spec:
         {{- if hasKey .Values.storage "app" }}
         - name: app-mount
           hostPath:
-            path: {{ .Values.storage.code.hostPath }}
+            path: {{ .Values.storage.app.hostPath }}
         {{- end }}
         {{- if hasKey .Values.storage "rootpersist" }}
         - name: root-mount
