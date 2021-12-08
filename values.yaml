@@ -16,7 +16,7 @@ storage:
   - label: app
     hostPath: /storage/d11111/volume-app
     sizeMB: 8000
-  - label: root-persist
+  - label: rootpersist
     hostPath: /storage/d11111/volume-root-persist
     sizeMB: 1000
 
