@@ -15,13 +15,12 @@ if [ ! "$(ls -A /app)" ]; then
   touch /root-persist/.bash_history;
   touch /root-persist/.gitconfig;
 
-  # TODO: HOW IS THIS SUPPOSED TO HAPPEN, AND WHERE ARE THE CREDENTIALS COMING FROM ?
-  #git init;
-  #git remote add --fetch origin $REPOSITORY_URL;
-  #git checkout -f $REPOSITORY_BRANCH;
-  #git remote set-url origin "$REPOSITORY_URL";
-  #git config --global user.email "$GIT_USER_EMAIL";
-  #git config --global user.name "$GIT_USER_NAME";
+  git init;
+  git remote add --fetch origin $REPOSITORY_URL;
+  git checkout -f $REPOSITORY_BRANCH;
+  git remote set-url origin "$REPOSITORY_URL";
+  git config --global user.email "$GIT_USER_EMAIL";
+  git config --global user.name "$GIT_USER_NAME";
 
   npm install;
 
