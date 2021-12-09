@@ -37,13 +37,12 @@ env:
 
 sshInternalProxyPublicKey: xxxx
 
-repository:
-  url: https://github.com/MarcusAhlfors/myservice
-  branch: main
-
-git: 
-  userName: info@diploi.dev
-  userEmail: Diploi User
+repositories:
+  web:
+    url: https://github.com/MarcusAhlfors/myservice
+    branch: main 
+    gitUserName: info@diploi.dev
+    gitUserEmail: Diploi User
 
 
 
