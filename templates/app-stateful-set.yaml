@@ -30,6 +30,14 @@ spec:
               value: {{ .value | quote }}
             {{- end }}
             {{- end }}
+            - name: REPOSITORY_URL
+              value: {{ .Values.repositories.web.url }} 
+            - name: REPOSITORY_BRANCH
+              value: {{ .Values.repositories.web.branch }} 
+            - name: GIT_USER_EMAIL
+              value: {{ .Values.repositories.web.gitUserEmail }} 
+            - name: GIT_USER_NAME
+              value: {{ .Values.repositories.web.gitUserName }}               
           volumeMounts:
             {{- if hasKey .Values.storage "app" }}
             - name: app-mount
