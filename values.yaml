@@ -36,3 +36,15 @@ env:
     selector: label=app
 
 sshInternalProxyPublicKey: xxxx
+
+repository:
+  url: https://github.com/MarcusAhlfors/myservice
+  branch: main
+
+git: 
+  userName: info@diploi.dev
+  userEmail: Diploi User
+
+
+
+
