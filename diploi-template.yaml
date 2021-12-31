@@ -91,12 +91,17 @@ actions:
 
 images:
   - label: app
-    dockerfile: Dockerfile
-    repository: web
-    stages:
-      - production
+    template:
+      dockerfile: DockerfileTemplate
+    project: 
+      repository: web
+      dockerfile: DockerfileProject
+      stages: 
+        - development
+    stages: 
+      - development
+      - production 
       - staging
-      - development      
 
 storage:
   - label: app

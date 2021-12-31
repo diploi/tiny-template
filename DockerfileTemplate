@@ -1,10 +1,6 @@
 FROM node:16.13
 
-# This dockerfile is run by diploi image builder, it will have 
-# this template repository as itse base and the actual project 
-# repository will be mounted in the repository folder.
-
-# Update packages
+# Update basic packages
 RUN apt-get update && apt-get install -y nano supervisor openssh-server git bash wget curl locales
 
 RUN mkdir /run/sshd /root/.ssh \
@@ -28,11 +24,6 @@ RUN mkdir -p /root-persist \
   && ln -s /root-persist/.bash_history /root/.bash_history \
   && ln -s /root-persist/.gitconfig /root/.gitconfig \
   && ln -s /root-persist/.vscode-server/ /root/.vscode-server
-
-# Install application code
-WORKDIR /app
-COPY project/. ./
-RUN npm install
 
 # Init and run supervisor
 COPY template/runonce.sh /root/runonce.sh
