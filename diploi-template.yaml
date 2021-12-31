@@ -91,9 +91,9 @@ actions:
 
 images:
   - label: app
-    template:
+    templateBuild:
       dockerfile: DockerfileTemplate
-    project: 
+    projectBuild: 
       repository: web
       dockerfile: DockerfileProject
       stages: 
