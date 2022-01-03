@@ -41,11 +41,11 @@ parameterGroups:
 
 environmentVariables:
   - identifier: PROJECT_TITLE
-    value: ProjectTitleDefaultFromTemplate
+    defaultValue: ProjectTitleDefaultFromTemplate
     type: string
     contexts: label=app
   - identifier: SOME_OTHER_SETTING
-    value: asdasd
+    defaultValue: asdasd
     type: string
     contexts: label=app
 
