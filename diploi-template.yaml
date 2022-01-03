@@ -4,93 +4,93 @@ description: NextJS template for Diploi
 
 stages:
   - name: Production
-    label: production
+    identifier: production
   - name: Staging
-    label: staging
+    identifier: staging
   - name: Development
-    label: development
+    identifier: development
 
 contexts:
   - name: app
-    label: app
+    identifier: app
   - name: redis
-    label: redis
+    identifier: redis
 
 parameterGroups:
   - name: MySQL Database
-    label: mysql
+    identifier: mysql
     toggleable: true
     parameters:
       - name: Host
-        label: DB_HOST
-        value: mysql.example.com
+        identifier: DB_HOST
+        defaultValue: mysql.example.com
         type: string
       - name: Password
-        label: DB_PASSWORD
-        value: ''
+        identifier: DB_PASSWORD
+        defaultValue: ''
         type: secret
   - name: Servers
-    label: SERVER
+    identifier: SERVER
     parameters:
       - name: Server count
-        label: SERVER_REPLICAS
-        value: 2
+        identifier: SERVER_REPLICAS
+        defaultValue: 2
         type: integer
         stages:
           - production
 
 environmentVariables:
-  - name: PROJECT_TITLE
+  - identifier: PROJECT_TITLE
     value: ProjectTitleDefaultFromTemplate
     type: string
-    selector: label=app
-  - name: SOME_OTHER_SETTING
+    contexts: label=app
+  - identifier: SOME_OTHER_SETTING
     value: asdasd
     type: string
-    selector: label=app
+    contexts: label=app
 
 repositories:
   - name: web
-    label: web
-    url: https://github.com/NemesysLtd/diploi-node-sample #optional
+    identifier: web
+    exampleProjectUrl: https://github.com/NemesysLtd/diploi-node-sample #optional
 
 hosts:
   - name: App
-    label: app
-    url: 'www-[label].[default-domain]'
+    identifier: app
+    urlFormat: 'www-[label].[default-domain]'
 
 ssh:
-  - username: '[label]'
-    selector: label=app
+  - usernameFormat: '[label]'
+    contexts: label=app
     stages:
       - development
-  - username: '[label]-[index]'
-    selector: label=app
+  - usernameFormat: '[label]-[index]'
+    contexts: label=app
     stages:
       - production
-  - username: '[label]-redis'
-    selector: label=redis
+  - usernameFormat: '[label]-redis'
+    contexts: label=redis
 
 logs:
   - name: Pod Log
-    selector: label=app
+    contexts: label=app
   - name: API Log
-    selector: label=app
+    contexts: label=app
     command: tail --lines 2000 -f /var/log/api.log
   - name: API Error Log
-    selector: label=app
+    contexts: label=app
     command: tail --lines 2000 -f /var/log/api.log | grep Fatal
 
 actions:
   - name: Restart servers
-    selector: label=app
+    contexts: label=app
     command: npm run restart
   - name: Reinstall packages
-    selector: label=app
+    contexts: label=app
     command: npm run clean
 
 images:
-  - label: app
+  - identifier: app
     dockerfile: Dockerfile
     repository: web
     stages:
@@ -99,11 +99,11 @@ images:
       - development      
 
 storage:
-  - label: app
+  - identifier: app
     stages: 
       - development
     sizeMb: 8000 
-  - label: rootpersist
+  - identifier: rootpersist
     stages: 
       - development
     sizeMb: 1000 
