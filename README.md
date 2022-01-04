@@ -1,2 +1,3 @@
 # diploi-nextjs-template
-Diploi NextJS tempalte.
+
+Diploi NextJS tempalte..
