@@ -91,16 +91,15 @@ actions:
 
 images:
   - label: app
-    templateBuild:
-      dockerfile: DockerfileTemplate
-    projectBuild: 
-      repository: web
-      dockerfile: DockerfileProject
-      stages: 
-        - development
+    repository: web
+    baseImageDockerfile: DockerfileBase
+    dockerfile: Dockerfile
+    buildStages:
+      - production
+      - staging
     stages: 
       - development
-      - production 
+      - production
       - staging
 
 storage:
