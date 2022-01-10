@@ -91,12 +91,16 @@ actions:
 
 images:
   - identifier: app
-    baseImageDockerfile: Dockerfile
     repository: web
-    stages:
+    baseImageDockerfile: DockerfileBase
+    dockerfile: Dockerfile
+    buildStages:
       - production
       - staging
-      - development      
+    stages: 
+      - development
+      - production
+      - staging
 
 storage:
   - identifier: app
