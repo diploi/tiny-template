@@ -91,7 +91,7 @@ actions:
 
 images:
   - identifier: app
-    dockerfile: Dockerfile
+    baseImageDockerfile: Dockerfile
     repository: web
     stages:
       - production
