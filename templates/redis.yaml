@@ -28,7 +28,7 @@ spec:
               value: xxxyyy
             {{- range .Values.env }}
             {{- if contains "redis" .contexts }}
-            - name: {{ .name }}
+            - name: {{ .identifier }}
               value: {{ .value | quote }}
             {{- end }}
             {{- end }}
