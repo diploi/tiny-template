@@ -14,7 +14,7 @@ contexts:
   - name: app
     identifier: app
   - name: redis
-    identifier: redisdiploi:
+    identifier: redisdiploi
 
 parameterGroups:
   - name: MySQL Database
