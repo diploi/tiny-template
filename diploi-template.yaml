@@ -16,9 +16,6 @@ contexts:
   - name: redis
     identifier: redisdiploi:
 
-lisää iploi templaten actionsiin identifier -kenttä
-hae 
-
 parameterGroups:
   - name: MySQL Database
     identifier: mysql
