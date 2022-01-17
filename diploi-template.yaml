@@ -84,15 +84,15 @@ logs:
 actions:
   - identifier: server-restart
     name: Restart servers
-    contexts: label=app
+    labelSelector: app=app
     command: npm run restart
   - identifier: packages-reinstall
     name: Reinstall packages
-    contexts: label=app
+    labelSelector: app=app
     command: npm run clean
   - identifier: ping
     name: Ping
-    contexts: label=app
+    labelSelector: app=app
     command: echo "Pong"
 
 images:
