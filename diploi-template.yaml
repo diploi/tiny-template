@@ -14,7 +14,10 @@ contexts:
   - name: app
     identifier: app
   - name: redis
-    identifier: redis
+    identifier: redisdiploi:
+
+lisää iploi templaten actionsiin identifier -kenttä
+hae 
 
 parameterGroups:
   - name: MySQL Database
@@ -82,12 +85,18 @@ logs:
     command: tail --lines 2000 -f /var/log/api.log | grep Fatal
 
 actions:
-  - name: Restart servers
+  - identifier: server-restart
+    name: Restart servers
     contexts: label=app
     command: npm run restart
-  - name: Reinstall packages
+  - identifier: packages-reinstall
+    name: Reinstall packages
     contexts: label=app
     command: npm run clean
+  - identifier: ping
+    name: Ping
+    contexts: label=app
+    command: echo "Pong"
 
 images:
   - identifier: app
