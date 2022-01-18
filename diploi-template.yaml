@@ -101,7 +101,7 @@ actions:
   - identifier: log-test-write
     name: Log test write (Redis)
     labelSelector: app=redis
-    command: echo "$(date)\n" > /var/log/test.log
+    command: /bin/sh -c "echo $(date) >> /var/log/test.log"
 
 images:
   - identifier: app
