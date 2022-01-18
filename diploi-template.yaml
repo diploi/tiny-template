@@ -94,6 +94,14 @@ actions:
     name: Ping
     labelSelector: app=app
     command: echo "Pong"
+  - identifier: log-test-read
+    name: Log test read
+    labelSelector: app
+    command: tail -F -n 2000 /var/log/test.log
+  - identifier: log-test-write
+    name: Log test write
+    labelSelector: app
+    command: echo "$(date)\n" > /var/log/test.log
 
 images:
   - identifier: app
