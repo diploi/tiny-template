@@ -72,6 +72,10 @@ ssh:
     contexts: label=redis
 
 logs:
+  - identifier: app-log
+    name: App Log
+    contexts: label=app
+    command: tail --lines 2000 -f /var/log/app.log
   - identifier: pod-log
     name: Pod Log
     contexts: label=app
