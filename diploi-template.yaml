@@ -74,19 +74,19 @@ ssh:
 logs:
   - identifier: app-log
     name: App Log
-    contexts: label=app
+    labelSelector: app=app
     command: tail -n 2000 -f /var/log/app.log
   - identifier: pod-log
     name: Pod Log
-    contexts: label=app
+    labelSelector: app=app
     command: tail -n 2000 -f /var/log/syslog
   - identifier: api-log
     name: API Log
-    contexts: label=app
+    labelSelector: app=app
     command: tail -n 2000 -f /var/log/api.log
   - identifier: api-error-log
     name: API Error Log
-    contexts: label=app
+    labelSelector: app=app
     command: tail -n 2000 -f /var/log/api.log | grep Fatal
 
 actions:
