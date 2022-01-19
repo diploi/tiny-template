@@ -88,10 +88,6 @@ logs:
     name: API Error Log
     contexts: label=app
     command: tail --lines 2000 -f /var/log/api.log | grep Fatal
-  - identifier: log-test-read
-    name: Redis Test Log
-    labelSelector: app=redis
-    command: tail -F -n 2000 /var/log/test.log
 
 actions:
   - identifier: server-restart
