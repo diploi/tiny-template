@@ -129,3 +129,6 @@ storage:
     stages: 
       - development
     sizeMb: 1000 
+
+status:
+  url: http://app/api/status
