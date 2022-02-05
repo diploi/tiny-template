@@ -1,4 +1,4 @@
-FROM node:16.13
+FROM nodsssse:16.13
 
 # Update basic packages
 RUN apt-get update && apt-get install -y nano supervisor openssh-server git bash wget curl locales
