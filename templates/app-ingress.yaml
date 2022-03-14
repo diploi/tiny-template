@@ -17,10 +17,8 @@ spec:
           - path: '/'
             pathType: Prefix
             backend:
-              name: app
-              port:
-                number: 80
-              #service: (This is for newer kubernetes?)
-              #  name: {{ .Values.label }}
-              #  port:
-              #    number: 80
+              service:
+                name: app
+                port:
+                  number: 80
+                  
