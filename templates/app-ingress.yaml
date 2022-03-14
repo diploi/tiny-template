@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress
@@ -8,10 +8,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - {{ .Values.hosts.app }}
+        - { { .Values.hosts.app } }
       secretName: tls-secret
   rules:
-    - host: {{ .Values.hosts.app }}
+    - host: { { .Values.hosts.app } }
       http:
         paths:
           - path: '/'
