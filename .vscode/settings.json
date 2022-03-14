@@ -2,4 +2,7 @@
   "[yaml]": {
     "editor.formatOnSave": false
   },
+  "[helm]": {
+    "editor.formatOnSave": false
+  },
 }
