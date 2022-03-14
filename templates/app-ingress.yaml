@@ -18,7 +18,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ ternary "app" "disabled" .Values.enabled }}
+                name: app
                 port:
                   number: 80
                   

@@ -7,6 +7,6 @@ spec:
     - port: 80
       name: app
   selector:
-    app: app
+    app: {{ ternary "app" "disabled" .Values.enabled }}
 
 
