@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: redis
   serviceName: redis
-  replicas: 1
+  replicas: {{ ternary 1 0 .Values.enabled }}
   template:
     metadata:
       labels:

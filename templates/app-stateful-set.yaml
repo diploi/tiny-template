@@ -15,6 +15,7 @@ spec:
         app: app
     spec:
       terminationGracePeriodSeconds: 10
+      replicas: {{ ternary 1 0 .Values.enabled }}
       imagePullSecrets:
         - name: docker-pull-secret
       containers:

@@ -6,6 +6,8 @@
 
 stage: development
 
+enabled: true
+
 images:
   app: registry-docker-registry.registry/myfirstdeploiment/app:latest
 
