@@ -9,7 +9,7 @@ spec:
     matchLabels:
       app: disabled
   serviceName: disabled
-  replicas: {{ ternary 0 1 .Values.enabled }}
+  replicas: 1
   template:
     metadata:
       labels:
