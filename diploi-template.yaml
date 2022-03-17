@@ -110,7 +110,6 @@ actions:
 images:
   - identifier: app
     repository: web
-    baseImageDockerfile: DockerfileBase
     dockerfile: Dockerfile
     buildStages:
       - production
