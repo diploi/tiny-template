@@ -30,4 +30,5 @@ jobs:
           push: true
           cache-from: type=registry,ref=nemesys/diploi-nextjs-template:latest
           cache-to: type=inline
+          file: DockerfileBase
           tags: nemesys/diploi-nextjs-template:latest
