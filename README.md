@@ -1,3 +1,3 @@
-# diploi-nextjs-template
+# diploi-tiny-template
 
-Diploi NextJS template......
+Tiny project for quick builds to speed up testing
