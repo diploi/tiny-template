@@ -1,4 +1,4 @@
-FROM node:18-alpine-3.14
+FROM node:18-alpine3.14
 
 # Update basic packages
 RUN apk update && apk add nano supervisor openssh-server git bash wget curl
