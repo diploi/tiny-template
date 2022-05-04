@@ -4,7 +4,7 @@ FROM node:18-alpine3.14
 RUN apk update && apk add nano supervisor openssh-server git bash wget curl
 
 # Add node-dev
-RUN npm install -g node-dev
+RUN npm install -g node-dev nodemon
 
 RUN mkdir /run/sshd /root/.ssh \
   && chmod 0700 /root/.ssh \
