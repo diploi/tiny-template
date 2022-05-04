@@ -1,7 +1,7 @@
 FROM node:18-alpine
 
 # Update basic packages
-RUN apk update && apk add -y nano supervisor openssh-server git bash wget curl locales
+RUN apk update && apk add nano supervisor openssh-server git bash wget curl locales
 
 RUN mkdir /run/sshd /root/.ssh \
   && chmod 0700 /root/.ssh \
