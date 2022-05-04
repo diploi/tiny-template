@@ -22,8 +22,6 @@ if [ ! "$(ls -A /app)" ]; then
   git config --global user.email "$GIT_USER_EMAIL";
   git config --global user.name "$GIT_USER_NAME";
 
-  npm install;
-
 fi
 
 # Update internal ca certificate
