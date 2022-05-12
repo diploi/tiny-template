@@ -52,7 +52,7 @@ environmentVariables:
 repositories:
   - name: web
     identifier: web
-    exampleProjectUrl: https://github.com/NemesysLtd/diploi-node-sample #optional
+    exampleProjectUrl: https://github.com/NemesysLtd/diploi-tiny-template-example #optional
 
 hosts:
   - name: App
