@@ -20,5 +20,4 @@ spec:
               service:
                 name: app
                 port:
-                  number: 80
-                  
+                  number: {{ ternary 80 8080 .Values.enabled }}
