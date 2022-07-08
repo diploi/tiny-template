@@ -18,8 +18,8 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
         - name: disabled
-          image: nginxdemos/hello
+          image: nemesys/diploi-disabled
           ports:
             - containerPort: 80
-         
-        
+          args:
+            - "-port 80"
