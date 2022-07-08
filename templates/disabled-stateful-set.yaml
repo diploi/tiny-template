@@ -19,5 +19,6 @@ spec:
       containers:
         - name: disabled
           image: nemesys/diploi-disabled
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
