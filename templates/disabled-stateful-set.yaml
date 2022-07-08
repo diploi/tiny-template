@@ -21,5 +21,3 @@ spec:
           image: nemesys/diploi-disabled
           ports:
             - containerPort: 80
-          args:
-            - "-port 80"
