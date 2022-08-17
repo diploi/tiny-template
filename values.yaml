@@ -18,11 +18,9 @@ storage:
   - label: app
     hostPath: /storage/d11111/volume-app
     sizeMB: 8000
-    
-# not needed in project side?
-#  - label: rootpersist
-#    hostPath: /storage/d11111/volume-root-persist
-#    sizeMB: 1000
+  - label: rootpersist
+    hostPath: /storage/d11111/volume-root-persist
+    sizeMB: 1000
 
 parameterGroups:
   mysql:
