@@ -8,12 +8,9 @@ cd /app;
 # Seems that this is first run in devel instance
 # Intialize persistant storage
 if [ ! "$(ls -A /app)" ]; then
-  
+
   echo "Empty /app, assuming development instance setup was intended"
   #tar zxf /var/lib/diploi-app.tar.gz  -C /
-  mkdir -p /root-persist/.vscode-server;
-  touch /root-persist/.bash_history;
-  touch /root-persist/.gitconfig;
 
   git init;
   git remote add --fetch origin $REPOSITORY_URL;

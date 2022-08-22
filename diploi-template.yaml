@@ -114,20 +114,16 @@ images:
     buildStages:
       - production
       - staging
-    stages: 
+    stages:
       - development
       - production
       - staging
 
 storage:
   - identifier: app
-    stages: 
+    stages:
       - development
-    sizeMb: 8000 
-  - identifier: rootpersist
-    stages: 
-      - development
-    sizeMb: 1000 
+    sizeMb: 8000
 
 status:
   url: http://app/api/status

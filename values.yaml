@@ -1,6 +1,6 @@
 
 #
-# Example: 
+# Example:
 # These will be filled in automatically by core (based on diploi-template.yaml)
 #
 
@@ -18,9 +18,6 @@ storage:
   - label: app
     hostPath: /storage/d11111/volume-app
     sizeMB: 8000
-  - label: rootpersist
-    hostPath: /storage/d11111/volume-root-persist
-    sizeMB: 1000
 
 parameterGroups:
   mysql:
@@ -29,7 +26,7 @@ parameterGroups:
       DB_HOST: mysql,
       DB_DB_PASSWORD: pw
 
-env: 
+env:
   - name: SMTP_HOST
     value: somehost.someplace.net
     selector: label=app
@@ -42,10 +39,6 @@ sshInternalProxyPublicKey: xxxx
 repositories:
   web:
     url: https://github.com/MarcusAhlfors/myservice
-    branch: main 
+    branch: main
     gitUserName: info@diploi.dev
     gitUserEmail: Diploi User
-
-
-
-
