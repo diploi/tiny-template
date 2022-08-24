@@ -58,7 +58,6 @@ spec:
         - name: app-mount
           hostPath:
             path: {{ .Values.storage.app.hostPath }}/app
-        {{- end }}
         - name: bash-history
           hostPath:
             path: {{ .Values.storage.app.hostPath }}/root-persist/.bash_history
@@ -71,6 +70,7 @@ spec:
           hostPath:
             path: {{ .Values.storage.app.hostPath }}/root-persist/.gitconfig
             type: FileOrCreate
+        {{- end }}
         - name: ssh-keys
           secret:
             secretName: ssh-keys
