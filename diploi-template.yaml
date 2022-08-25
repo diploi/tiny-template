@@ -1,6 +1,7 @@
 diploiTemplateVersion: V1.0
 name: diploi-nextjs-template
 description: NextJS template for Diploi
+defaultName: Tiny App
 
 stages:
   - name: Production
