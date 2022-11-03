@@ -4,9 +4,7 @@ metadata:
   name: app
 spec:
   ports:
-    - port: {{ ternary 80 8080 .Values.enabled }}
+    - port: 80
       name: app
   selector:
-    app: {{ ternary "app" "disabled" .Values.enabled }}
-
-
+    app: app
