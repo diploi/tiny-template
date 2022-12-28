@@ -251,8 +251,7 @@
           </clipPath>
         </defs>
       </svg>
-      <h1>Diploy Tiny Server</h1>
-      <h2 id="project-title"></h2>
+      <h1 id="server-title">...</h1>
       <p>TIME <span id="time"></span></p>
       <p>STAGE <span id="stage"></span></p>
       <p>TEMPLATE_VERSION <span id="template-version"></span></p>
@@ -268,7 +267,7 @@
         const response = await fetch('/api/state');
         const json = await response.json();
         document.getElementById('time').innerText = json.TIME;
-        document.getElementById('project-title').innerText = json.PROJECT_TITLE;
+        document.getElementById('server-title').innerText = json.SERVER_TITLE;
         document.getElementById('stage').innerText = json.STAGE;
         document.getElementById('template-version').innerText = json.TEMPLATE_VERSION;
         document.getElementById('project-version').innerText = json.PROJECT_VERSION;

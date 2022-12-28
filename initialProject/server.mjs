@@ -41,7 +41,7 @@ const httpServer = http.createServer((request, response) => {
           {
             TIME: new Date().toISOString(),
             STAGE: process.env.STAGE || '-',
-            PROJECT_TITLE: process.env.PROJECT_TITLE || 'Title',
+            SERVER_TITLE: process.env.SERVER_TITLE || 'Title',
             TEMPLATE_VERSION: 'v0.0.0', // TODO: Make core send this to k8s => template
             PROJECT_VERSION: 'v0.0.0', // TODO: Make core send this to k8s => build => env
           },

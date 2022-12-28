@@ -27,8 +27,8 @@ parameterGroups:
           - production
 
 environmentVariables:
-  - identifier: PROJECT_TITLE
-    defaultValue: My Project
+  - identifier: SERVER_TITLE
+    defaultValue: My Tiny Server
     type: string
     contexts: label=app
   
