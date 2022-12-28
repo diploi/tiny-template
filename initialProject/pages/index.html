@@ -1,25 +1,15 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-
-    <title>Diploi</title>
-    <meta
-      name="description"
-      content="Focus on developing your applications in the cloud. No ops, no configuration, hands-down, straight-to-the-point efficient work effort every day."
-    />
-
-    <meta property="og:title" content="Diploi" />
-    <meta
-      property="og:description"
-      content="Focus on developing your applications in the cloud. No ops, no configuration, hands-down, straight-to-the-point efficient work effort every day."
-    />
+    <title>Diploi Tiny Server</title>
+    <meta name="description" content="Tiny Server Status Page" />
+    <meta property="og:title" content="Diploi Tiny Server" />
+    <meta property="og:description" content="Tiny Server Status Page." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://diploi.com/" />
-    <meta property="og:image" content="/assets/image/og.png" />
+    <meta property="og:image" content="og.png" />
     <meta property="og:image:alt" content="Diploi logo" />
 
     <style>
@@ -28,7 +18,7 @@
         --bg-secondary: #ef904b;
       }
 
-      @font-face {
+      /*@font-face {
         font-family: 'Soleil';
         font-style: normal;
         font-weight: 500;
@@ -42,7 +32,7 @@
         font-weight: 400;
         src: url('/assets/font/NunitoSans-Regular.woff2') format('woff2');
         font-display: swap;
-      }
+      }*/
 
       html,
       body {
@@ -97,7 +87,7 @@
       p,
       input,
       button {
-        font-size: clamp(1rem, -0.875rem + 8.333vw, 1.25rem);
+        font-size: 1rem;
       }
 
       p {
@@ -261,10 +251,12 @@
           </clipPath>
         </defs>
       </svg>
-      <h1>Deployment is starting up</h1>
-      <h2>Tiny App Project | Tiny App Development</h2>
-      <h3>462</h3>
-      <p>DEMODEMODEMO</p>
+      <h1>Diploy Tiny Server</h1>
+      <h2 id="project-title"></h2>
+      <p>TIME <span id="time"></span></p>
+      <p>STAGE <span id="stage"></span></p>
+      <p>TEMPLATE_VERSION <span id="template-version"></span></p>
+      <p>PROJECT_VERSION <span id="project-version"></span></p>
 
       <hr />
 
@@ -272,27 +264,20 @@
     </main>
 
     <script>
-      const refetch = () => {
-        const xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = () => {
-          if (xhttp.readyState == 4) {
-            // ensure that error has changed and / or the most recent page is error page at all
-            if (xhttp.responseText.indexOf('<!-- Diploi error page 462 -->') === -1) {
-              location.reload();
-            } else {
-              setTimeout(() => {
-                refetch();
-              }, 3000);
-            }
-          }
-        };
-        xhttp.open('GET', location.href, true);
-        xhttp.send();
+      const refetch = async () => {
+        const response = await fetch('/api/state');
+        const json = await response.json();
+        document.getElementById('time').innerText = json.TIME;
+        document.getElementById('project-title').innerText = json.PROJECT_TITLE;
+        document.getElementById('stage').innerText = json.STAGE;
+        document.getElementById('template-version').innerText = json.TEMPLATE_VERSION;
+        document.getElementById('project-version').innerText = json.PROJECT_VERSION;
+        console.log('GOT', json);
+        setTimeout(() => {
+          refetch();
+        }, 3000);
       };
-      setTimeout(() => {
-        refetch();
-      }, 3000);
+      refetch();
     </script>
-    <!-- Diploi error page 462 -->
   </body>
 </html>
