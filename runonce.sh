@@ -6,6 +6,12 @@ echo "Runonce started";
 # Insert accepted ssh key(s)
 cat /etc/ssh/internal_ssh_host_rsa.pub >> /root/.ssh/authorized_keys;
 
+# Update internal ca certificate
+update-ca-certificates
+
+# Make all special env variables available in ssh also (ssh will wipe out env by default)
+env >> /etc/environment
+
 cd /app;
 
 # Seems that this is first run in devel instance
@@ -18,6 +24,7 @@ if [ ! "$(ls -A /app)" ]; then
   touch /root-persist/.bash_history;
   touch /root-persist/.gitconfig;
 
+  git config --global init.defaultBranch main
   git init;
   git config credential.helper '!diploi-credential-helper';
   git remote add --fetch origin $REPOSITORY_URL;
@@ -28,12 +35,6 @@ if [ ! "$(ls -A /app)" ]; then
   npm install;
 
 fi
-
-# Update internal ca certificate
-update-ca-certificates
-
-# Make all special env variables available in ssh also (ssh will wipe out env by default)
-env >> /etc/environment
 
 # Now that everything is initialized, start all services
 supervisorctl start app
