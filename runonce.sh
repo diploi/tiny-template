@@ -10,7 +10,7 @@ cat /etc/ssh/internal_ssh_host_rsa.pub >> /root/.ssh/authorized_keys;
 update-ca-certificates
 
 # Make all special env variables available in ssh also (ssh will wipe out env by default)
-env >> /root/.ssh/environment
+env >> /etc/environment
 
 cd /app;
 
