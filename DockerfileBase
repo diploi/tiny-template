@@ -16,6 +16,10 @@ RUN mkdir /run/sshd /root/.ssh \
   # Go to app folder by default
   && echo "cd /app;" >> /root/.bashrc
 
+# Gitconfig secrets and credential helper
+RUN ln -s /etc/diploi-git/gitconfig /etc/gitconfig
+COPY diploi-credential-helper /usr/local/bin
+
 # Init and run supervisor
 COPY runonce.sh /root/runonce.sh
 COPY supervisord.conf /etc/supervisord.conf
