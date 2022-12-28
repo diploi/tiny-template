@@ -1,7 +1,7 @@
 FROM node:18-slim
 
 # Update basic packages
-RUN apt-get update && apt-get install -y nano supervisor openssh-server git bash wget curl locales libc6 libstdc++6 ca-certificates tar nodemon
+RUN apt-get update && apt-get install -y nano supervisor openssh-server git bash wget curl locales libc6 libstdc++6 python-minimal ca-certificates tar nodemon
 
 RUN mkdir /run/sshd /root/.ssh \
   && chmod 0700 /root/.ssh \
