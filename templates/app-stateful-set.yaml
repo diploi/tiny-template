@@ -40,6 +40,8 @@ spec:
               value: {{ .Values.hosts.app }}
             - name: STAGE
               value: {{ .Values.stage }}
+            - name: TEMPLATE_VERSION
+              value: {{ .Values.templateVersion }}
           volumeMounts:
             {{- if hasKey .Values.storage "app" }}
             - name: app-mount
