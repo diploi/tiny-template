@@ -26,79 +26,62 @@ const getContentType = (pathName) => {
 
 // Request handler
 const httpServer = http.createServer((request, response) => {
+  const sendResponse = (statusCode, contentType, data) => {
+    console.log(new Date().toISOString(), request.url, statusCode);
+    response.setHeader('Content-Type', contentType);
+    response.writeHead(statusCode);
+    response.end(data);
+  };
+
   try {
     const parsedUrl = url.parse(request.url, true);
     let pathName = parsedUrl.pathname;
     if (!pathName || pathName == '/') pathName = '/index.html';
 
     // API endpoints
-
     if (pathName == '/api/state') {
-      response.setHeader('Content-Type', 'application/json');
-      response.writeHead(404);
-      response.end(
-        JSON.stringify(
-          {
-            TIME: new Date().toISOString(),
-            STAGE: process.env.STAGE || '-',
-            SERVER_TITLE: process.env.SERVER_TITLE || 'Title',
-            TEMPLATE_VERSION: 'v0.0.0', // TODO: Make core send this to k8s => template
-            PROJECT_VERSION: 'v0.0.0', // TODO: Make core send this to k8s => build => env
-          },
-          null,
-          2
-        )
-      );
-      return;
+      const data = {
+        TIME: new Date().toISOString(),
+        STAGE: process.env.STAGE || '-',
+        SERVER_TITLE: process.env.SERVER_TITLE || 'Title',
+        TEMPLATE_VERSION: 'v0.0.0', // TODO: Make core send this to k8s => template
+        PROJECT_VERSION: 'v0.0.0', // TODO: Make core send this to k8s => build => env
+      };
+      return sendResponse(200, 'application/json', JSON.stringify(data, null, 2));
     }
 
     if (pathName == '/api/status') {
-      response.setHeader('Content-Type', 'application/json');
-      response.writeHead(404);
-      response.end(
-        JSON.stringify(
+      const data = {
+        diploiStatusVersion: 1,
+        items: [
           {
-            diploiStatusVersion: 1,
-            items: [
-              {
-                identifier: 'tinyservice',
-                description: 'Server status',
-                name: 'Tiny Server',
-                status: 'green',
-              },
-            ],
+            identifier: 'tinyservice',
+            description: 'Server status',
+            name: 'Tiny Server',
+            status: 'green',
           },
-          null,
-          2
-        )
-      );
-      return;
+        ],
+      };
+      return sendResponse(200, 'application/json', JSON.stringify(data, null, 2));
     }
 
     // Static files
     fs.readFile(`${baseDir}${pathName}`, (error, data) => {
       if (!error) {
-        response.setHeader('Content-Type', getContentType(pathName));
-        console.log(new Date().toISOString(), request.url, 200);
-        response.writeHead(200);
-        response.end(data);
+        return sendResponse(200, getContentType(pathName), data);
       } else {
-        console.log(new Date().toISOString(), request.url, 404);
         if (error.errno != -2) console.log('Error 404', error);
-        response.setHeader('Content-Type', 'text/plain');
-        response.writeHead(404);
-        response.end('404 - File Not Found');
+        return sendResponse(404, 'text/plain', '404 - File Not Found');
       }
     });
   } catch (error) {
     try {
-      response.setHeader('Content-Type', 'text/plain');
-      response.writeHead(500);
-      response.end('500 - Internal Server Error');
-    } catch (e) {}
-    console.log('Error 500', error);
-
-    console.log(new Date().toISOString(), request.url, 500);
+      console.log('Error 500', error);
+      sendResponse(505, 'text/plain', '500 - Internal Server Error');
+    } catch (e) {
+      console.log('Error2 500', error, e);
+      console.log(new Date().toISOString(), request.url, 500);
+    }
   }
 });
 
