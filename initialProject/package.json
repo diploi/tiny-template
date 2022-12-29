@@ -2,7 +2,7 @@
   "name": "diploi-tiny-project",
   "version": "0.1.0",
   "scripts": {
-    "start": "if [ ${STAGE} = \"production\" ]; then node server.js; else nodemon server.js; fi",
+    "start": "if [ ${STAGE} = \"production\" ]; then node server.mjs; else nodemon server.mjs; fi",
     "lint": "next lint"
   },
   "dependencies": {
