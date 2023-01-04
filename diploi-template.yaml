@@ -33,8 +33,8 @@ environmentVariables:
     contexts: label=app
   
 repositories:
-  - name: web
-    identifier: web
+  - name: app
+    identifier: app
 
 hosts:
   - name: App
@@ -85,16 +85,15 @@ actions:
 
 images:
   - identifier: app
-    repository: web
+    repository: app
     dockerfile: Dockerfile
-    image: ghcr.io/nemesysltd/diploi-tiny-template:[template-tag]
-    buildStages:
-      - production
-      - staging
+    image: ghcr.io/nemesysltd/diploi-tiny-template
     stages:
       - development
       - production
       - staging
+    skipBuildStages:
+      - development
 
 storage:
   - identifier: app
