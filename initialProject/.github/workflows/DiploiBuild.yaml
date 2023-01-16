@@ -1,10 +1,10 @@
-name: BuildImage
+name: DiploiBuild
 
 on:
   push:
 
 env:
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: ${{ secrets.DIPLOI_IMAGE }}
 
 jobs:
   build:
@@ -21,17 +21,17 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ghcr.io/${{ env.IMAGE_NAME }}
+          images: ${{ secrets.DIPLOI_REGISTRY_URL }}/${{ env.IMAGE_NAME }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Log in to the GitHub container registry
+      - name: Log in to the Diploi container registry
         uses: docker/login-action@v2
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: ${{ secrets.DIPLOI_REGISTRY_URL }}
+          username: ${{ secrets.DIPLOI_REGISTRY_USER }}
+          password: ${{ secrets.DIPLOI_REGISTRY_SECRET }}
 
       - name: Build and push
         uses: docker/build-push-action@v3
