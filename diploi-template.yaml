@@ -92,7 +92,7 @@ images:
       - development
       - production
       - staging
-    skipBuildStages:
+    manualBuildStages:
       - development
 
 storage:
