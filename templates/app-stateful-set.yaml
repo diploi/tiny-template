@@ -17,7 +17,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 10
       imagePullSecrets:
-        - name: docker-pull-secret
+        - name: diploi-pull-secret
       containers:
         - name: app
           image: {{ .Values.images.app }}
