@@ -1,35 +1,21 @@
 diploiTemplateVersion: V1.0
-name: diploi-nextjs-template
-description: NextJS template for Diploi
+name: diploi-tiny
+description: Minimal app
 defaultName: Tiny App
 
 stages:
-  - name: Production
-    identifier: production
-  - name: Staging
-    identifier: staging
   - name: Development
     identifier: development
-
+  - name: Staging
+    identifier: staging
+  - name: Production
+    identifier: production
+  
 contexts:
   - name: app
     identifier: app
-  - name: redis
-    identifier: redisdiploi
 
 parameterGroups:
-  - name: MySQL Database
-    identifier: mysql
-    toggleable: true
-    parameters:
-      - name: Host
-        identifier: DB_HOST
-        defaultValue: mysql.example.com
-        type: string
-      - name: Password
-        identifier: DB_PASSWORD
-        defaultValue: ''
-        type: secret
   - name: Servers
     identifier: SERVER
     parameters:
@@ -41,19 +27,14 @@ parameterGroups:
           - production
 
 environmentVariables:
-  - identifier: PROJECT_TITLE
-    defaultValue: ProjectTitleDefaultFromTemplate
+  - identifier: SERVER_TITLE
+    defaultValue: My Tiny Server
     type: string
     contexts: label=app
-  - identifier: SOME_OTHER_SETTING
-    defaultValue: asdasd
-    type: string
-    contexts: label=app
-
+  
 repositories:
-  - name: web
-    identifier: web
-    exampleProjectUrl: https://github.com/NemesysLtd/diploi-tiny-template-example #optional
+  - name: app
+    identifier: app
 
 hosts:
   - name: App
@@ -69,8 +50,6 @@ ssh:
     contexts: label=app
     stages:
       - production
-  - usernameFormat: '[label]-redis'
-    contexts: label=redis
 
 logs:
   - identifier: app-log
@@ -99,10 +78,6 @@ actions:
     name: Reinstall packages
     labelSelector: app=app
     command: npm run clean
-  - identifier: ping
-    name: Ping
-    labelSelector: app=app
-    command: echo "Pong"
   - identifier: log-test-write
     name: Log test write
     labelSelector: app=app
@@ -110,15 +85,15 @@ actions:
 
 images:
   - identifier: app
-    repository: web
+    repository: app
     dockerfile: Dockerfile
-    buildStages:
-      - production
-      - staging
+    image: ghcr.io/nemesysltd/diploi-tiny-template
     stages:
       - development
       - production
       - staging
+    manualBuildStages:
+      - development
 
 storage:
   - identifier: app

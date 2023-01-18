@@ -1,3 +1,3 @@
-# diploi-tiny-template
+# Diploi Tiny template
 
-Tiny project for quick builds to speed up testing...
+A minimal Node 18 web application template just to showcase what is required to get a working app running.

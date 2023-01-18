@@ -21,6 +21,7 @@ spec:
       containers:
         - name: app
           image: {{ .Values.images.app }}
+          imagePullPolicy: Always
           #command: ['sh', '-c', 'echo The app is running! && sleep 10000']
           ports:
             - containerPort: 80
@@ -35,10 +36,12 @@ spec:
               value: {{ .Values.repositories.web.url }}
             - name: REPOSITORY_BRANCH
               value: {{ .Values.repositories.web.branch }}
-            - name: GIT_USER_EMAIL
-              value: {{ .Values.repositories.web.gitUserEmail }}
-            - name: GIT_USER_NAME
-              value: {{ .Values.repositories.web.gitUserName }}
+            - name: APP_PUBLIC_URL
+              value: {{ .Values.hosts.app }}
+            - name: STAGE
+              value: {{ .Values.stage }}
+            - name: TEMPLATE_VERSION
+              value: {{ .Values.templateVersion }}
           volumeMounts:
             {{- if hasKey .Values.storage "app" }}
             - name: app-mount
@@ -53,6 +56,8 @@ spec:
             - name: ssh-keys
               mountPath: /etc/ssh/internal_ssh_host_rsa.pub
               subPath: internal_ssh_host_rsa.pub
+            - name: diploi-git
+              mountPath: /etc/diploi-git
       volumes:
         {{- if hasKey .Values.storage "app" }}
         - name: app-mount
@@ -74,3 +79,6 @@ spec:
         - name: ssh-keys
           secret:
             secretName: ssh-keys
+        - name: diploi-git
+          secret:
+            secretName: diploi-git
