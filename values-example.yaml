@@ -1,44 +1,44 @@
 
 #
-# Example:
+# Example of what the helm values file will look like
 # These will be filled in automatically by core (based on diploi-template.yaml)
 #
 
 stage: development
 
+templateVersion: v0.0.22
+
 enabled: true
 
 images:
-  app: registry-docker-registry.registry/myfirstdeploiment/app:latest
+  app: >-
+    registry-docker-registry.registry/myfirstdeploiment/app@sha256:20ab6f3a928bc0a7d18525c46ca92c
 
 hosts:
-  app: xxx.diploinetes.nemesys.fi
+  app: myapp.mydomain.com
 
 storage:
-  - label: app
-    hostPath: /storage/d11111/volume-app
-    sizeMB: 8000
+  app:
+    hostPath: /data/volumes/V404
+    sizeMb: 8000
 
 parameterGroups:
-  mysql:
-    enabled: false,
-    parameters:
-      DB_HOST: mysql,
-      DB_DB_PASSWORD: pw
+  - identifier: SERVER_REPLICAS
+    value: '2'
 
 env:
-  - name: SMTP_HOST
-    value: somehost.someplace.net
-    selector: label=app
-  - name: SMTP_PASSWORD
-    value: xyz
-    selector: label=app
+  - identifier: SERVER_TITLE
+    contexts: label=app
+    value: My Tiny Server
 
-sshInternalProxyPublicKey: xxxx
+envMap:
+  SERVER_TITLE: *ref_0
+
+sshInternalProxyPublicKey: >
+  ssh-rsa AAAABBBBCCCC diploi-internal-key@nemesys.fi
 
 repositories:
-  web:
-    url: https://github.com/MarcusAhlfors/myservice
+  app:
+    url: https://github.com/SomeUser/somerepo.git
     branch: main
-    gitUserName: info@diploi.dev
-    gitUserEmail: Diploi User
+    tag: ''
