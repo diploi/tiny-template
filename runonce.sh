@@ -24,7 +24,7 @@ if [ ! "$(ls -A /app)" ]; then
   touch /root-persist/.bash_history;
   touch /root-persist/.gitconfig;
 
-  git config --global init.defaultBranch main
+  git config init.defaultBranch main
   git init;
   git config credential.helper '!diploi-credential-helper';
   git remote add --fetch origin $REPOSITORY_URL;
