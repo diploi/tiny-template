@@ -1,0 +1,44 @@
+
+#
+# Example of what the helm values file will look like
+# These will be filled in automatically by core (based on diploi-template.yaml)
+#
+
+stage: development
+
+templateVersion: v0.0.22
+
+enabled: true
+
+images:
+  app: >-
+    registry-docker-registry.registry/myfirstdeploiment/app@sha256:20ab6f3a928bc0a7d18525c46ca92c
+
+hosts:
+  app: myapp.mydomain.com
+
+storage:
+  app:
+    hostPath: /data/volumes/V404
+    sizeMb: 8000
+
+parameterGroups:
+  - identifier: SERVER_REPLICAS
+    value: '2'
+
+env:
+  - identifier: SERVER_TITLE
+    contexts: label=app
+    value: My Tiny Server
+
+envMap:
+  SERVER_TITLE: *ref_0
+
+sshInternalProxyPublicKey: >
+  ssh-rsa AAAABBBBCCCC diploi-internal-key@nemesys.fi
+
+repositories:
+  app:
+    url: https://github.com/SomeUser/somerepo.git
+    branch: main
+    tag: ''

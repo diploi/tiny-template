@@ -1,0 +1,105 @@
+diploiTemplateVersion: V1.0
+name: diploi-tiny
+description: Minimal app
+defaultName: Tiny App
+
+stages:
+  - name: Development
+    identifier: development
+  - name: Staging
+    identifier: staging
+  - name: Production
+    identifier: production
+  
+contexts:
+  - name: app
+    identifier: app
+
+parameterGroups:
+  - name: Servers
+    identifier: SERVER
+    parameters:
+      - name: Server count
+        identifier: SERVER_REPLICAS
+        defaultValue: 2
+        type: integer
+        stages:
+          - production
+
+environmentVariables:
+  - identifier: SERVER_TITLE
+    defaultValue: My Tiny Server
+    type: string
+    contexts: label=app
+  
+repositories:
+  - name: app
+    identifier: app
+
+hosts:
+  - name: App
+    identifier: app
+    urlFormat: 'www-[label].[default-domain]'
+
+ssh:
+  - usernameFormat: '[label]'
+    contexts: label=app
+    stages:
+      - development
+  - usernameFormat: '[label]-[index]'
+    contexts: label=app
+    stages:
+      - production
+
+logs:
+  - identifier: app-log
+    name: App Log
+    labelSelector: app=app
+    command: tail -n 2000 -F /var/log/app.log
+  - identifier: pod-log
+    name: Pod Log
+    labelSelector: app=app
+    command: tail -n 2000 -F /var/log/syslog
+  - identifier: api-log
+    name: API Log
+    labelSelector: app=app
+    command: tail -n 2000 -F /var/log/api.log
+  - identifier: api-error-log
+    name: API Error Log
+    labelSelector: app=app
+    command: tail -n 2000 -F /var/log/api.log | grep Fatal
+
+actions:
+  - identifier: server-restart
+    name: Restart servers
+    labelSelector: app=app
+    command: npm run restart
+  - identifier: packages-reinstall
+    name: Reinstall packages
+    labelSelector: app=app
+    command: npm run clean
+  - identifier: log-test-write
+    name: Log test write
+    labelSelector: app=app
+    command: echo $(date) >> /var/log/test.log
+
+images:
+  - identifier: app
+    repository: app
+    dockerfile: Dockerfile
+    image: ghcr.io/nemesysltd/diploi-tiny-template
+    stages:
+      - development
+      - production
+      - staging
+    manualBuildStages:
+      - development
+
+storage:
+  - identifier: app
+    stages:
+      - development
+    sizeMb: 8000
+
+status:
+  url: http://app/api/status
