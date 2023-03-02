@@ -10,28 +10,19 @@ stages:
     identifier: staging
   - name: Production
     identifier: production
-  
+
 contexts:
   - name: app
     identifier: app
 
 parameterGroups:
-  - name: Servers
-    identifier: SERVER
-    parameters:
-      - name: Server count
-        identifier: SERVER_REPLICAS
-        defaultValue: 2
-        type: integer
-        stages:
-          - production
 
 environmentVariables:
   - identifier: SERVER_TITLE
     defaultValue: My Tiny Server
     type: string
     contexts: label=app
-  
+
 repositories:
   - name: app
     identifier: app
