@@ -23,8 +23,8 @@ jobs:
           git clone $TARGET_REPO temp_repo
           cd temp_repo
           
-          # Sync the folder (assuming the folder to sync is 'folder-to-sync')
-          rsync -av --delete ../folder-to-sync/ ./
+          # Sync the folder
+          rsync -av --delete ../initialProject/ ./
           
           # Commit and push the changes, if there are any
           git add .
