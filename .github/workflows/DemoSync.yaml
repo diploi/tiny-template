@@ -1,0 +1,38 @@
+name: DemoSync
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  sync-folder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v2
+
+      - name: Sync folder and push
+        run: |
+          # Configure git
+          git config --global user.email "demo-sync@diploi.com"
+          git config --global user.name "Demo Sync"
+          
+          # Clone the target repository using HTTPS and PAT for authentication
+          TARGET_REPO="https://x-access-token:${{ secrets.DEMO_REPOSITORY_PAT }}@github.com/diploi/tiny-template-demo.git"
+          git clone $TARGET_REPO temp_repo
+          cd temp_repo
+          
+          # Sync the folder (assuming the folder to sync is 'folder-to-sync')
+          rsync -av --delete ../folder-to-sync/ ./
+          
+          # Commit and push the changes, if there are any
+          git add .
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Commit sync" && git push origin main)
+          
+          # Tag and push the tag
+          TAG_NAME=${GITHUB_REF#refs/tags/}
+          git tag $TAG_NAME
+          git push origin --tags
+        env:
+          GH_PAT: ${{ secrets.DEMO_REPOSITORY_PAT }}
