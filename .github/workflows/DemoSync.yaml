@@ -12,7 +12,7 @@ jobs:
       - name: Checkout source repository
         uses: actions/checkout@v2
 
-      - name: Sync folder and push
+      - name: Sync initialProject and push
         run: |
           # Configure git
           git config --global user.email "demo-sync@diploi.com"
@@ -24,7 +24,7 @@ jobs:
           cd temp_repo
           
           # Sync the folder
-          rsync -av --delete ../initialProject/ ./
+          rsync -av --delete --exclude='.git/' ../initialProject/ ./
           
           # Commit and push the changes, if there are any
           git add .
@@ -34,5 +34,5 @@ jobs:
           TAG_NAME=${GITHUB_REF#refs/tags/}
           git tag $TAG_NAME
           git push origin --tags
-        env:
-          GH_PAT: ${{ secrets.DEMO_REPOSITORY_PAT }}
+        #env:
+        #  GH_PAT: ${{ secrets.DEMO_REPOSITORY_PAT }}
